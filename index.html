@@ -8,7 +8,7 @@
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: linear-gradient(to right, #ffae00, #ec008c);
+            background: radial-gradient(circle at top, #141e30, #243b55);
             color: #fff;
             margin: 0;
             padding: 0;
@@ -36,7 +36,7 @@
 
         .animated-text {
             opacity: 0;
-            animation: fadeIn 2s ease-out forwards;
+            animation: fadeIn 4s ease-out forwards;
         }
 
         @keyframes fadeIn {
@@ -55,7 +55,7 @@
 
     <script>
         function calculateAge() {
-            const birthdate = new Date('2005-05-13');
+            const birthdate = new Date('2004-05-13');
             const now = new Date();
 
             const ageInMilliseconds = now - birthdate;
