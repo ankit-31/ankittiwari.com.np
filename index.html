@@ -1,87 +1,62 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+    <title>Age Calculator</title>
     <style>
         body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #141414;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
         }
 
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin-bottom: 40px;
-        }
-
-        .countdown {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ffcc00;
-        }
-
-        .flashy {
-            animation: flash 1s infinite alternate;
-        }
-
-        @keyframes flash {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0.5;
-            }
+        #ageDisplay {
+            font-size: 24px;
+            color: #333;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="flashy">Coming Soon</h1>
-        <p>Ankit Tiwari</p>
-        <div class="countdown flashy" id="countdown"></div>
-    </div>
+    <div id="ageDisplay"></div>
 
     <script>
-        // Set the date we're counting down to
-        const countDownDate = new Date("Jan 1, 2025 00:00:00").getTime();
+        function calculateAge() {
+            // Provide the birthdate in YYYY/MM/DD format
+            const birthdate = new Date('2004-05-13');
+            const now = new Date();
 
-        // Update the countdown every 1 second
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
+            const ageInMilliseconds = now - birthdate;
+            const seconds = Math.floor(ageInMilliseconds / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const months = Math.floor(days / 30.436875); // average days in a month
+            const years = Math.floor(months / 12);
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const ageDisplay = document.getElementById('ageDisplay');
+            ageDisplay.innerHTML = `
+                <p>${years} Years</p>
+                <p>${months % 12} Months</p>
+                <p>${days % 30} Days</p>
+                <p>${hours % 24} Hours</p>
+                <p>${minutes % 60} Minutes</p>
+                <p>${seconds % 60} Seconds</p>
+            `;
+        }
 
-            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        // Update age every second
+        setInterval(calculateAge, 1000);
 
-            // If the countdown is over, display a message
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-            }
-        }, 1000);
+        // Initial calculation
+        calculateAge();
     </script>
 </body>
 </html>
