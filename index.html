@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age and Name Display</title>
+    <title>Premium Age Display</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #f0f0f0;
+            background: linear-gradient(to right, #ffae00, #ec008c);
+            color: #fff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,26 +17,24 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         #nameDisplay {
             font-size: 36px;
-            color: #4285f4;
-            text-shadow: 0 0 10px #4285f4, 0 0 20px #4285f4, 0 0 40px #4285f4;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
         }
 
         #ageDisplay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 24px;
-            color: #333;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        #ageText {
-            font-size: 18px;
-            color: #4285f4;
-            text-shadow: 0 0 10px #4285f4, 0 0 20px #4285f4, 0 0 40px #4285f4;
-            margin-top: 20px;
+        .animated-text {
             opacity: 0;
             animation: fadeIn 2s ease-out forwards;
         }
@@ -52,8 +51,7 @@
 </head>
 <body>
     <div id="nameDisplay">Ankit Tiwari</div>
-    <div id="ageDisplay"></div>
-    <div id="ageText">18 years</div>
+    <div id="ageDisplay" class="animated-text"></div>
 
     <script>
         function calculateAge() {
@@ -70,17 +68,13 @@
 
             const ageDisplay = document.getElementById('ageDisplay');
             ageDisplay.innerHTML = `
-                <p>${years} Years</p>
-                <p>${months % 12} Months</p>
-                <p>${days % 30} Days</p>
-                <p>${hours % 24} Hours</p>
-                <p>${minutes % 60} Minutes</p>
-                <p>${seconds % 60} Seconds</p>
+                <p class="animated-text">${years} Years</p>
+                <p class="animated-text">${months % 12} Months</p>
+                <p class="animated-text">${days % 30} Days</p>
+                <p class="animated-text">${hours % 24} Hours</p>
+                <p class="animated-text">${minutes % 60} Minutes</p>
+                <p class="animated-text">${seconds % 60} Seconds</p>
             `;
-
-            // Display the age text with animation
-            const ageText = document.getElementById('ageText');
-            ageText.innerHTML = `${years} years`;
         }
 
         setInterval(calculateAge, 1000);
