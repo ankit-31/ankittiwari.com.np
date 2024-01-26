@@ -36,6 +36,16 @@
 
         .animated-text {
             opacity: 1;
+            animation: flash 1s infinite alternate;
+        }
+
+        @keyframes flash {
+            from {
+                color: #ff00ff; /* Start color */
+            }
+            to {
+                color: #00ffff; /* End color */
+            }
         }
 
         @media (max-width: 600px) {
