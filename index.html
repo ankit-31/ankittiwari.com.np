@@ -1,95 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
-    <style>
-        body {
-            background-color: #f0f0f0; /* Attractive background color */
-            font-family: Arial, sans-serif;
-            color: #333; /* Formal and decent text color */
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balloon Burst</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .balloon {
+    width: 100px;
+    height: 150px;
+    background-color: #ff6384;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+  }
 
-        .container {
-            margin-top: 50px;
-        }
+  .burst {
+    animation: burst 0.5s linear forwards;
+  }
 
-        button {
-            padding: 10px 20px;
-            background-color: #007bff; /* Button background color */
-            color: #fff; /* Button text color */
-            border: none;
-            cursor: pointer;
-        }
-
-        .balloon {
-            width: 50px;
-            height: 70px;
-            background-color: #ff5722; /* Balloon color */
-            border-radius: 50%;
-            position: absolute;
-            animation: floatUp 5s ease-in-out infinite;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-200px); }
-            100% { transform: translateY(0); }
-        }
-
-        .burst {
-            background-image: url('burst.png'); /* Burst image */
-            background-size: contain;
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            animation: burstAnimation 0.5s forwards;
-        }
-
-        @keyframes burstAnimation {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* Hide images initially */
-        .images {
-            display: none;
-        }
-    </style>
+  @keyframes burst {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+</style>
 </head>
 <body>
-    <div class="container" id="container">
-        <h1>Welcome to Our Website</h1>
-        <p>This is a sample text for demonstration purposes.</p>
-        <button onclick="startBalloons()">Click Me</button>
-    </div>
-
-    <!-- Script for balloon functionality -->
-    <script>
-        function startBalloons() {
-            const container = document.getElementById('container');
-            const images = document.querySelector('.images');
-
-            // Remove laptop and software images
-            images.style.display = 'none';
-
-            // Create balloon element
-            const balloon = document.createElement('div');
-            balloon.classList.add('balloon');
-            balloon.style.left = `${Math.random() * 90}vw`; // Random horizontal position
-            balloon.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation duration
-            container.appendChild(balloon);
-
-            // Add click event listener to burst the balloon
-            balloon.addEventListener('click', function() {
-                balloon.classList.add('burst'); // Add burst animation
-                setTimeout(() => {
-                    balloon.remove(); // Remove balloon element after burst animation completes
-                }, 500);
-            });
-        }
-    </script>
+<div class="balloon" id="balloon"></div>
+<script>
+  document.getElementById('balloon').addEventListener('click', function() {
+    this.classList.add('burst');
+    setTimeout(() => {
+      this.style.display = 'none';
+      alert("Boom! Balloon burst!");
+    }, 500);
+  });
+</script>
 </body>
 </html>
