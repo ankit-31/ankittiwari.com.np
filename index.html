@@ -9,10 +9,10 @@
             background-color: #f0f0f0; /* Attractive background color */
             font-family: Arial, sans-serif;
             color: #333; /* Formal and decent text color */
+            text-align: center;
         }
 
         .container {
-            text-align: center;
             margin-top: 50px;
         }
 
@@ -24,18 +24,6 @@
             cursor: pointer;
         }
 
-        .images {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .images img {
-            width: 300px;
-            margin: 10px;
-        }
-
-        /* Balloon styles */
         .balloon {
             width: 50px;
             height: 70px;
@@ -64,41 +52,35 @@
             0% { opacity: 1; }
             100% { opacity: 0; }
         }
+
+        /* Hide images initially */
+        .images {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container" id="container">
         <h1>Welcome to Our Website</h1>
         <p>This is a sample text for demonstration purposes.</p>
-        <button onclick="showImages()">Click Me</button>
-    </div>
-
-    <div class="images" id="images">
-        <img src="laptop_image.jpg" alt="Laptop Image">
-        <img src="software_image.jpg" alt="Software Image">
+        <button onclick="startBalloons()">Click Me</button>
     </div>
 
     <!-- Script for balloon functionality -->
     <script>
-        function showImages() {
-            var images = document.getElementById("images");
-            if (images.style.display === "none") {
-                images.style.display = "block";
-            } else {
-                images.style.display = "none";
-            }
-        }
-
-        // Balloon functionality
         function startBalloons() {
-            const balloonsContainer = document.getElementById('container'); // Attach balloons to container
+            const container = document.getElementById('container');
+            const images = document.querySelector('.images');
+
+            // Remove laptop and software images
+            images.style.display = 'none';
 
             // Create balloon element
             const balloon = document.createElement('div');
             balloon.classList.add('balloon');
             balloon.style.left = `${Math.random() * 90}vw`; // Random horizontal position
             balloon.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation duration
-            balloonsContainer.appendChild(balloon);
+            container.appendChild(balloon);
 
             // Add click event listener to burst the balloon
             balloon.addEventListener('click', function() {
