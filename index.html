@@ -23,7 +23,13 @@
     border-radius: 50%;
     position: absolute;
     bottom: 0;
+    animation: float 10s linear infinite;
     cursor: pointer;
+  }
+
+  @keyframes float {
+    0% { bottom: 0; }
+    100% { bottom: 100vh; }
   }
 
   .burst {
@@ -53,7 +59,7 @@
     });
   }
 
-  setInterval(createBalloon, 1000);
+  setInterval(createBalloon, 2000);
 </script>
 </body>
 </html>
