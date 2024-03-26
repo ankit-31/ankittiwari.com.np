@@ -1,86 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ankit Tiwari - Portfolio</title>
-<style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0ebeb; /* Soft pink background */
-        color: #333; /* Dark gray text color */
-    }
-    #container {
-        text-align: center;
-        padding: 50px;
-    }
-    h1 {
-        color: #333;
-        font-size: 36px;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    p {
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-    #interact {
-        cursor: pointer;
-        color: blue;
-        text-decoration: underline;
-    }
-    #specialContent {
-        display: none;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        border-radius: 10px;
-        margin-top: 20px;
-        font-size: 18px;
-        color: #333;
-    }
-    #softwareImage {
-        display: none;
-        max-width: 300px;
-    }
-    #laptopImage {
-        display: none;
-        max-width: 300px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Attractive background color */
+            font-family: Arial, sans-serif;
+            color: #333; /* Formal and decent text color */
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            cursor: pointer;
+        }
+
+        .images {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .images img {
+            width: 300px;
+            margin: 10px;
+        }
+
+        /* Balloon styles */
+        .balloon {
+            width: 50px;
+            height: 70px;
+            background-color: #ff5722; /* Balloon color */
+            border-radius: 50%;
+            position: absolute;
+            animation: floatUp 5s ease-in-out infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-200px); }
+            100% { transform: translateY(0); }
+        }
+
+        .burst {
+            background-image: url('burst.png'); /* Burst image */
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            animation: burstAnimation 0.5s forwards;
+        }
+
+        @keyframes burstAnimation {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-<div id="container">
-    <h1>Ankit Tiwari</h1>
-    <p>Age: 18</p>
-    <p>Studying Software Engineering at Pokhara University</p>
-    <p>Passionate about software development and technology.</p>
-   
-    <p>Click <span id="interact">here</span> for something special!</p>
-    <div id="specialContent">
-        <img src="software.png" id="softwareImage" alt="Software">
-        <img src="laptop.png" id="laptopImage" alt="Laptop">
+    <div class="container" id="container">
+        <h1>Welcome to Our Website</h1>
+        <p>This is a sample text for demonstration purposes.</p>
+        <button onclick="showImages()">Click Me</button>
     </div>
-</div>
 
-<script>
-    // JavaScript for interactivity
-    document.getElementById("interact").addEventListener("click", function() {
-        var specialContent = document.getElementById("specialContent");
-        var softwareImage = document.getElementById("softwareImage");
-        var laptopImage = document.getElementById("laptopImage");
-        if (specialContent.style.display === "none") {
-            specialContent.style.display = "block";
-            softwareImage.style.display = "block";
-            laptopImage.style.display = "block";
-        } else {
-            specialContent.style.display = "none";
-            softwareImage.style.display = "none";
-            laptopImage.style.display = "none";
+    <div class="images" id="images">
+        <img src="laptop_image.jpg" alt="Laptop Image">
+        <img src="software_image.jpg" alt="Software Image">
+    </div>
+
+    <!-- Script for balloon functionality -->
+    <script>
+        function showImages() {
+            var images = document.getElementById("images");
+            if (images.style.display === "none") {
+                images.style.display = "block";
+            } else {
+                images.style.display = "none";
+            }
         }
-    });
-</script>
+
+        // Balloon functionality
+        function startBalloons() {
+            const balloonsContainer = document.getElementById('container'); // Attach balloons to container
+
+            // Create balloon element
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.left = `${Math.random() * 90}vw`; // Random horizontal position
+            balloon.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation duration
+            balloonsContainer.appendChild(balloon);
+
+            // Add click event listener to burst the balloon
+            balloon.addEventListener('click', function() {
+                balloon.classList.add('burst'); // Add burst animation
+                setTimeout(() => {
+                    balloon.remove(); // Remove balloon element after burst animation completes
+                }, 500);
+            });
+        }
+    </script>
 </body>
 </html>
