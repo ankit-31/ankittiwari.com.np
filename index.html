@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Balloon Burst</title>
+<title>Balloons Burst</title>
 <style>
   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    overflow: hidden;
     background-color: #f0f0f0;
   }
-  
+
+  .container {
+    position: relative;
+    height: 100vh;
+  }
+
   .balloon {
-    width: 100px;
-    height: 150px;
+    width: 50px;
+    height: 80px;
     background-color: #ff6384;
     border-radius: 50%;
-    position: relative;
+    position: absolute;
+    bottom: 0;
     cursor: pointer;
   }
 
@@ -34,15 +37,23 @@
 </style>
 </head>
 <body>
-<div class="balloon" id="balloon"></div>
+<div class="container" id="container"></div>
 <script>
-  document.getElementById('balloon').addEventListener('click', function() {
-    this.classList.add('burst');
-    setTimeout(() => {
-      this.style.display = 'none';
-      alert("Boom! Balloon burst!");
-    }, 500);
-  });
+  function createBalloon() {
+    const balloon = document.createElement('div');
+    balloon.classList.add('balloon');
+    balloon.style.left = `${Math.random() * (window.innerWidth - 50)}px`;
+    document.getElementById('container').appendChild(balloon);
+
+    balloon.addEventListener('click', function() {
+      this.classList.add('burst');
+      setTimeout(() => {
+        this.remove();
+      }, 500);
+    });
+  }
+
+  setInterval(createBalloon, 1000);
 </script>
 </body>
 </html>
