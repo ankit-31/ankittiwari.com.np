@@ -8,14 +8,19 @@
   body {
     margin: 0;
     overflow: hidden;
-    background: linear-gradient(to bottom, #3498db, #2980b9); /* Background gradient */
+    background: #3498db; /* Initial background color */
     color: #fff;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 1s ease;
   }
 
   .container {
     position: relative;
-    height: 100vh;
+    height: 80%; /* Reduced height for the balloons */
   }
 
   .balloon {
@@ -31,7 +36,7 @@
 
   @keyframes float {
     0% { bottom: 0; }
-    100% { bottom: 100vh; }
+    100% { bottom: 100%; }
   }
 
   .burst {
@@ -53,9 +58,11 @@
 
   #intro {
     position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 24px;
     color: #ffc107; /* Gold color */
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Font stack */
   }
@@ -64,18 +71,25 @@
 <body>
 <div class="container" id="container"></div>
 <div id="score">Score: <span id="scoreValue">0</span></div>
-<div id="intro">Ankit Tiwari pursuing software engineering and hobby in software and technology</div>
+<div id="intro">Ankit Tiwari<br> Pursuing Software Engineering<br> Hobby in Software and Technology</div>
 
 <script>
   let score = 0;
+  let gameRunning = true;
 
   function createBalloon() {
+    if (!gameRunning) return;
     const balloon = document.createElement('div');
     balloon.classList.add('balloon');
     balloon.style.left = `${Math.random() * (window.innerWidth - 50)}px`;
     document.getElementById('container').appendChild(balloon);
 
+    balloon.addEventListener('animationiteration', function() {
+      if (!this.classList.contains('burst')) gameOver();
+    });
+
     balloon.addEventListener('click', function() {
+      if (!gameRunning) return;
       this.classList.add('burst');
       score++;
       document.getElementById('scoreValue').textContent = score;
@@ -98,6 +112,25 @@
       balloon.style.animation = `float ${currentSpeed * 0.9}s linear infinite`; // Increase speed by 10%
     });
   }
+
+  function gameOver() {
+    gameRunning = false;
+    alert(`Game Over! Your score: ${score}`);
+    document.getElementById('container').innerHTML = '';
+    document.getElementById('scoreValue').textContent = '0';
+    score = 0;
+    gameRunning = true;
+    document.body.style.backgroundColor = '#3498db'; // Reset background color
+  }
+
+  // Change background color
+  const colors = ['#e74c3c', '#27ae60', '#f39c12', '#8e44ad'];
+  let colorIndex = 0;
+
+  setInterval(() => {
+    document.body.style.backgroundColor = colors[colorIndex];
+    colorIndex = (colorIndex + 1) % colors.length;
+  }, 5000);
 </script>
 </body>
 </html>
