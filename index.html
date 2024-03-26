@@ -85,7 +85,7 @@
     document.getElementById('container').appendChild(balloon);
 
     balloon.addEventListener('animationiteration', function() {
-      if (!this.classList.contains('burst')) gameOver();
+      if (!this.classList.contains('burst') && this.getBoundingClientRect().top <= 0) gameOver();
     });
 
     balloon.addEventListener('click', function() {
